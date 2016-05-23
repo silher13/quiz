@@ -2,14 +2,12 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='icon' href='favicon.ico' type='image/x-icon' />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1>Bienvenido a <%= title %></h1>
-    <p>El portal donde podrá crear sus propios juegos!</p>
-    <footer>
-  	<p><a href="https://github.com/silher13/">Mi pagina en GitHub</a></p>
-    </footer> 
+    <p>El portal donde puedes crear sus propios juegos</p>
+    <p><a href="/question">Comience a jugar!</a></p>
   </body>
 </html>
