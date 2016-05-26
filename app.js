@@ -4,22 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
-var routes = require('./routes/index'); //enrutador que usamos, que interpretará las url
-//var users = require('./routes/users'); Se borra 
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var partials = require('express-partials');
 
 var routes = require('./routes/index'); //enrutador que vamos a usar
 //var users = require('./routes/users'); Se borra pq no usamos users
@@ -37,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(partials()); //instalado el mw que da soporte a las vistas parciales
 
 app.use('/', routes);
 //app.use('/users', users); idem que arriba

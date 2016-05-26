@@ -1,5 +1,3 @@
-//en este archivo incluimos nuevas rutas en el enrutador
-
 var express = require('express');
 var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
