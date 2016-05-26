@@ -1,10 +1,41 @@
-// GET /quizes/question
+
+var models = require('../models');
+
+// GET /question
 exports.question = function(req, res, next) {
-   res.render('quizes/question', {question: 'Capital de Italia'});
+	models.Quiz.findOne() // Busca la primera pregunta existente
+		.then(function(quiz) {
+			if (quiz) {
+				var answer = req.query.answer || '';
+
+				res.render('quizes/question', {question: quiz.question,
+								                answer: answer});
+		    } else {
+		    	throw new Error('No hay preguntas en la BBDD.');
+		    }
+		})
+		.catch(function(error) {
+			next(error);
+		});
 };
 
-// GET /quizes/result
-exports.result = function(req, res, next) {
-	var result = ((req.query.result === 'Roma') ? 'Correcta' : 'Incorrecta');
-	res.render('../result', {result: result});
+
+// GET /check
+exports.check = function(req, res, next) {
+	models.Quiz.findOne() // Busca la primera pregunta existente
+		.then(function(quiz) {
+			if (quiz) {
+				var answer = req.query.answer || "";
+
+				var result = answer === quiz.answer ? 'Correcta' : 'Incorrecta';
+
+				res.render('quizes/result', { result: result, 
+											   answer: answer });
+		    } else {
+		    	throw new Error('No hay preguntas en la BBDD.');
+		    }
+		})
+		.catch(function(error) {
+			next(error);
+		});
 };
