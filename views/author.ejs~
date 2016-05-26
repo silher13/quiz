@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head> 
+<body>
+<h1>Nombres de los autores:</h1>
+	<h4>Silvia Hervás Avilés</h4>
+	<img src="/yo.jpg" WIDTH=178 HEIGHT=250 ALT="Silvia Hervás Avilés">
+</body> 
+</html>
