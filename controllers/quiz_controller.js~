@@ -2,8 +2,11 @@ var models = require('../models');
 
 
 // GET /quizzes
+
 exports.index = function(req, res, next) {
-	models.Quiz.findAll()
+	var search = req.query.search || "";
+	search = search.replace(" ","%");
+	models.Quiz.findAll({where: {question: {$like: "%" + search + "%"}}})
 		.then(function(quizzes) {
 			res.render('quizzes/index.ejs', { quizzes: quizzes});
 		})
@@ -11,7 +14,6 @@ exports.index = function(req, res, next) {
 			next(error);
 		});
 };
-
 
 // GET /quizzes/:id
 exports.show = function(req, res, next) {
