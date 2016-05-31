@@ -28,6 +28,7 @@ app.use(session({secret: "Quiz 2016",
 		saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials()); //instalado el mw que da soporte a las vistas parciales
+app.use(flash()); //instalar mw flash
 
 app.use('/', routes);
 //app.use('/users', users); idem que arriba
