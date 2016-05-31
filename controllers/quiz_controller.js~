@@ -19,10 +19,19 @@ exports.load = function(req, res, next, quizId) {
 // GET /quizzes
 exports.index = function(req, res, next) {
 	var search = req.query.search || "";
-	search = search.replace(" ","%");
+	var format = req.params.format || "";
+	
 	models.Quiz.findAll({where: {question: {$like: "%" + search + "%"}}})
 		.then(function(quizzes) {
-			res.render('quizzes/index.ejs', { quizzes: quizzes});
+			if(format===("json")){
+				res.json({ quizzes: quizzes});
+			}
+			else if (format===("html")){
+				res.render('quizzes/index.ejs', { quizzes: quizzes});
+			}
+			else {
+				res.render('quizzes/index.ejs', { quizzes: quizzes});
+			}
 		})
 		.catch(function(error) {
 			next(error);
@@ -110,6 +119,19 @@ exports.update = function(req, res, next) {
       res.render('quizzes/edit', {quiz: req.quiz});
     })
     .catch(function(error) {
+	  req.flash('error', 'Error al editar el Quiz: '+error.message);
+      next(error);
+    });
+};
+
+// DELETE /quizzes/:id
+exports.destroy = function(req, res, next) {
+  req.quiz.destroy()
+    .then( function() {
+	  req.flash('success', 'Quiz borrado con éxito.');
+      res.redirect('/quizzes');
+    })
+    .catch(function(error){
 	  req.flash('error', 'Error al editar el Quiz: '+error.message);
       next(error);
     });
