@@ -61,12 +61,14 @@ exports.new = function(req, res, next){
 exports.create = function(req, res, next){
 	var quiz = models.Quiz.build({ question: req.body.quiz.question,
 				     answer: req.body.quiz.answer});
-    //guardamos en la bae de datos los campos pregunta y respuesta de quiz
+    //guardamos en la base de datos los campos pregunta y respuesta de quiz
 	quiz.save({fields: ["question", "answer"]})
 		.then(function(quiz){
+		req.flash('success', 'Quiz creado con éxito.');
 		res.redirect('/quizzes');
 		})
 		.catch(function(error){
+			req.flash('error', 'Error al crear un Quiz: '+error.message);
 			next(error);
 		});
 };
