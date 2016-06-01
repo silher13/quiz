@@ -27,6 +27,15 @@ var sequelize = new Sequelize(url,
 // Importar la definicion de la tabla Quiz de quiz.js
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
 
-//La sincronizacion e inicializacion de la BBDD se realiza a partir de ahora con los comandos de sequelize-cli y no en index.js
+// Importar la definicion de la tabla Comments de comment.js
+var Comment = sequelize.import(path.join(__dirname,'comment'));
+
+// Relaciones entre modelos
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
+
+
+//usar migraciones y seeders
 
 exports.Quiz = Quiz; // exportar definición de tabla Quiz
+exports.Comment = Comment; // exportar definición de tabla Comments
