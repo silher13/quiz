@@ -9,6 +9,7 @@ var url = require('url');
  * Si la autenticacion es correcta, la promesa se satisface devuelve un objeto con el User.
  * Si la autenticacion falla, la promesa se satisface pero devuelve null.
  */
+
 var authenticate = function(login, password) {
     
     return models.User.findOne({where: {username: login}})
@@ -67,6 +68,13 @@ exports.create = function(req, res, next) {
     });
 };
 
+exports.loginRequired = function (req, res, next){
+	if (req.session.user){  //indica si el usuario se ha autenticado
+		next();
+	} else { 		//si no lo redirecciona a la pagina de login 
+		res.redirect('/session?redir=' + (req.param('redir') || req.url));		//se guarda la url en un parametro oculto redir del formulario session/new.ejs
+	}
+};
 
 // DELETE /session   -- Destruir sesion 
 exports.destroy = function(req, res, next) {

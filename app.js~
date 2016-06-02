@@ -51,6 +51,7 @@ app.use(function(req, res, next) {
     next();
   }else if (ahora.getTime() - user.tiempo > 5000){
     delete req.session.user;
+	//Redirecciona a la pagina ppal
     res.redirect('/');
     next();
   }else{
