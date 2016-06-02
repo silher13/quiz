@@ -20,6 +20,15 @@
 
 <ul>
 <% for (var i in quiz.Comments) { %>
+	<% if (quiz.Comments[i].accepted) { %>
+
 	<li> <%=quiz.Comments[i].text %> </li>
+
+	<% } else if (session.user) { %>
+
+	<li> <%=quiz.Comments[i].text %> </li>
+	<a href="/quizzes/<%= quiz.id %>/comments/<%= quiz.Comments[i].id %>/accept?_method=PUT"><button>Aceptar</button></a>
+
+	<% } %>
 <% } %>
 </ul>
