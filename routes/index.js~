@@ -22,7 +22,7 @@ router.param('userId', userController.load);  // autoload :userId
 // Definición de rutas de /users
 router.get('/users',                    userController.index);   // listado usuarios
 router.get('/users/:userId(\\d+)',      userController.show);    // ver un usuario
-router.get('/users/new',                userController.new);     // formulario sign un
+router.get('/users/new',                userController.new);     // formulario sign in
 router.post('/users',                   userController.create);  // registrar usuario
 router.get('/users/:userId(\\d+)/edit', userController.edit);     // editar información de cuenta
 router.put('/users/:userId(\\d+)',      userController.update);   // actualizar información de cuenta

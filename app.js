@@ -32,6 +32,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials()); //instalado el mw que da soporte a las vistas parciales
 app.use(flash()); //instalar mw flash
 
+// Helper dinamico:  un MW que copia la sesión de req.session a 
+// res.locals.session para que esté accesible en las vistas. Así podrá consultarse en la vista 
+// layout.ejs si hay sesión o no.
+
+app.use(function(req, res, next) {
+
+   // Hacer visible req.session en las vistas
+   res.locals.session = req.session;
+
+   next();
+});
+
 app.use('/', routes);
 //app.use('/users', users); idem que arriba
 
