@@ -44,6 +44,23 @@ app.use(function(req, res, next) {
    next();
 });
 
+app.use(function(req, res, next) {
+  var user = req.session.user;
+  var ahora = new Date();
+  if(!user){
+    next();
+  }else if (ahora.getTime() - user.tiempo > 5000){
+    delete req.session.user;
+	//Redirecciona a la pagina ppal
+    res.redirect('/');
+    next();
+  }else{
+    user.tiempo = new Date().getTime();
+    next();
+  }
+});
+
+
 app.use('/', routes);
 //app.use('/users', users); idem que arriba
 
