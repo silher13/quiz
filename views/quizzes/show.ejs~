@@ -27,7 +27,7 @@
 	<% } else if (session.user) { %>
 
 	<li> <%=quiz.Comments[i].text %> </li>
-	<a href="/quizzes/<%= quiz.id %>/comments/<%= comment.id %>/accept?_method=PUT"><button>Aceptar</button></a>
+	<a href="/quizzes/<%= quiz.id %>/comments/<%= quiz.Comments[i].id %>/accept?_method=PUT"><button>Aceptar</button></a>
 
 	<% } %>
 <% } %>

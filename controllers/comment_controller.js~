@@ -19,6 +19,7 @@ exports.create = function(req, res, next) {
         QuizId: req.quiz.id
       });
 
+
   comment.save()
     .then(function(comment) {
       req.flash('success', 'Comentario creado con éxito.');
@@ -54,6 +55,7 @@ exports.load = function(req, res, next, commentId) {
         .catch(function(error) { next(error); });
 };
 
+// GET /quizzes/:quizId/comments/:commentId/accept
 exports.accept = function(req, res, next) {
 
   req.comment.accepted = true;
