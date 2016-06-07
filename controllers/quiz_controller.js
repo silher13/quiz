@@ -51,11 +51,11 @@ exports.show = function(req, res, next) {
 	}
 	else if (format===("html")){
 		res.render('quizzes/show', {quiz: req.quiz,
-											answer: answer});
+				 	    answer: answer});
 	}
 	else {
 		res.render('quizzes/show', {quiz: req.quiz,
-											answer: answer});
+					    answer: answer});
 	}
 };
 
@@ -111,6 +111,7 @@ exports.edit = function(req, res, next) {
 
   res.render('quizzes/edit', {quiz: quiz});
 };
+
 var models = require('../models');
 var Sequelize = require('sequelize'); //necesario para Tema14:Validacion de preguntas
 
@@ -203,17 +204,17 @@ exports.create = function(req, res, next) {
   quiz.save({fields: ["question", "answer", "AuthorId"]})
   	.then(function(quiz) {
 		req.flash('success', 'Quiz creado con éxito.');
-    	res.redirect('/quizzes');  // res.redirect: Redirección HTTP a lista de preguntas
-    })
-    .catch(Sequelize.ValidationError, function(error) {
+    		res.redirect('/quizzes');  // res.redirect: Redirección HTTP a lista de preguntas
+        })
+       .catch(Sequelize.ValidationError, function(error) {
 
-      req.flash('error', 'Errores en el formulario:');
-      for (var i in error.errors) {
-          req.flash('error', error.errors[i].value);
-      };
+      		req.flash('error', 'Errores en el formulario:');
+      		for (var i in error.errors) {
+          	req.flash('error', error.errors[i].value);
+     	};
 
-      res.render('quizzes/new', {quiz: quiz});
-    })
+   res.render('quizzes/new', {quiz: quiz});
+})
     .catch(function(error) {
 		req.flash('error', 'Error al crear un Quiz: '+error.message);
 		next(error);
